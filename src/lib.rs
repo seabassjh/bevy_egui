@@ -583,9 +583,10 @@ impl Plugin for EguiPlugin {
 
         if let Ok(render_app) = app.get_sub_app_mut(RenderApp) {
             render_app
-                .init_resource::<egui_node::EguiPipeline>()
-                .init_resource::<SpecializedRenderPipelines<EguiPipeline>>()
-                .init_resource::<EguiTransforms>()
+                .add_systems(
+                    ExtractSchedule,
+                    render_systems::init_resource_pipeline_specialized_transforms
+                )
                 .add_systems(
                     ExtractSchedule,
                     (

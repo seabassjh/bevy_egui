@@ -191,6 +191,15 @@ pub fn prepare_egui_transforms_system(
 #[derive(Resource, Deref, DerefMut, Default)]
 pub struct EguiTextureBindGroups(pub HashMap<EguiTextureId, BindGroup>);
 
+/// Initializes egui pipeline resources.
+pub fn init_resource_pipeline_specialized_transforms(
+    mut commands: Commands,
+) {
+    commands.init_resource::<EguiPipeline>();
+    commands.init_resource::<SpecializedRenderPipelines<EguiPipeline>>();
+    commands.init_resource::<EguiTransforms>();
+}
+
 /// Queues bind groups.
 pub fn queue_bind_groups_system(
     mut commands: Commands,
